@@ -1,0 +1,44 @@
+# --- Core API Framework ---
+fastapi==0.115.2
+uvicorn[standard]==0.30.6
+
+# --- Database + Async PostgreSQL ---
+SQLAlchemy==2.0.36
+asyncpg==0.29.0
+psycopg2-binary==2.9.9
+
+# --- Geo / GIS / PostGIS Support ---
+geoalchemy2==0.14.2
+shapely==2.0.4
+
+# --- Environment Configuration ---
+python-dotenv==1.0.1
+
+# --- Hugging Face Transformers + LLM Models ---
+transformers==4.45.1
+torch==2.4.1
+tokenizers==0.20.1   # ✅ Fixed version compatible with transformers
+accelerate==0.27.2   # Required for Phi-3 model optimization
+safetensors==0.4.2   # Required for Phi-3 model loading
+
+# --- NLP + Fuzzy Matching ---
+rapidfuzz==3.9.3
+spacy==3.7.4
+
+# --- Geocoding + Plus Codes ---
+openlocationcode==1.0.1
+geopy==2.4.1
+
+# --- QR Code Generation ---
+qrcode==7.4.2
+pillow==10.3.0
+
+# --- Data Utilities ---
+pandas==2.2.3
+numpy==1.26.4
+
+# --- Logging + Developer Tools ---
+rich==13.9.2
+tqdm==4.66.4
+supabase
+requests

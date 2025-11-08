@@ -1,0 +1,19 @@
+# render.yaml — for GeoFixers backend deployment
+services:
+  - type: web
+    name: geofixers-backend
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port 10000"
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: QR_DIR
+        value: "qr_codes"
+      - key: HUGGINGFACE_MODEL
+        value: "shiprocket-ai/open-tinybert-indian-address-ner"

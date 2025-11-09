@@ -3,17 +3,22 @@ services:
   - type: web
     name: geofixers-backend
     env: python
+    runtime: python
+    pythonVersion: 3.10.13         # ✅ Force Python 3.10 to avoid build errors
+    plan: free
+    region: oregon                 # or any closer region to you
+    rootDir: backend               # ✅ your code is inside /backend
     buildCommand: "pip install -r requirements.txt"
     startCommand: "uvicorn app.main:app --host 0.0.0.0 --port 10000"
-    plan: free
     envVars:
       - key: DATABASE_URL
-        sync: false
+        sync: false                # set manually in Render dashboard
       - key: SUPABASE_URL
-        sync: false
+        sync: false                # set manually in Render dashboard
       - key: SUPABASE_KEY
-        sync: false
+        sync: false                # set manually in Render dashboard
       - key: QR_DIR
-        value: "qr_codes"
+        value: "qr_codes"          # directory for generated QR codes
       - key: HUGGINGFACE_MODEL
         value: "shiprocket-ai/open-tinybert-indian-address-ner"
+    autoDeploy: true               # ✅ automatically deploy on git push

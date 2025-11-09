@@ -17,7 +17,7 @@ python-dotenv==1.0.1
 # --- Hugging Face Transformers + LLM Models ---
 transformers==4.45.1
 torch==2.7.1
-tokenizers==0.20.1   # ✅ Fixed version compatible with transformers
+tokenizers==0.19.1   # ✅ Fixed version compatible with transformers
 accelerate==0.27.2   # Required for Phi-3 model optimization
 safetensors==0.4.2   # Required for Phi-3 model loading
 

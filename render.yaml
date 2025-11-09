@@ -1,24 +1,34 @@
-# render.yaml — for GeoFixers backend deployment
+# render.yaml — complete configuration for GeoFixers backend (FastAPI)
+
 services:
   - type: web
     name: geofixers-backend
     env: python
     runtime: python
-    pythonVersion: 3.10.13         # ✅ Force Python 3.10 to avoid build errors
+    pythonVersion: 3.10.13           # ✅ Force Python 3.10 for compatibility
     plan: free
-    region: oregon                 # or any closer region to you
-    rootDir: backend               # ✅ your code is inside /backend
+    region: oregon                   # or your nearest region
+    rootDir: backend                 # ✅ your backend code is in /backend
+
     buildCommand: "pip install -r requirements.txt"
     startCommand: "uvicorn app.main:app --host 0.0.0.0 --port 10000"
+
+    autoDeploy: true                 # ✅ Automatically deploy on every git push
+
+    # 🩺 Health check — helps Render auto-restart if the app goes down
+    healthCheckPath: "/"
+    healthCheckIntervalSeconds: 30   # check every 30 seconds
+    healthCheckTimeoutSeconds: 10
+    healthCheckFailureThreshold: 3   # restart if 3 checks fail
+
     envVars:
       - key: DATABASE_URL
-        sync: false                # set manually in Render dashboard
+        sync: false                  # set manually in Render dashboard
       - key: SUPABASE_URL
-        sync: false                # set manually in Render dashboard
+        sync: false
       - key: SUPABASE_KEY
-        sync: false                # set manually in Render dashboard
+        sync: false
       - key: QR_DIR
-        value: "qr_codes"          # directory for generated QR codes
+        value: "qr_codes"
       - key: HUGGINGFACE_MODEL
         value: "shiprocket-ai/open-tinybert-indian-address-ner"
-    autoDeploy: true               # ✅ automatically deploy on git push
